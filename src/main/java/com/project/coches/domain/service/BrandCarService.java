@@ -1,6 +1,6 @@
 package com.project.coches.domain.service;
 
-import com.project.coches.domain.pojo.BrandCarPojo;
+import com.project.coches.domain.dto.BrandCarDto;
 import com.project.coches.domain.repository.IBrandCarRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,22 +14,22 @@ public class BrandCarService implements IBrandCarService {
 
     private final IBrandCarRepository iBrandCarRepository;
     @Override
-    public List<BrandCarPojo> getAll() {
+    public List<BrandCarDto> getAll() {
         return iBrandCarRepository.getAll();
     }
 
     @Override
-    public Optional<BrandCarPojo> getBrandCar(Integer id) {
+    public Optional<BrandCarDto> getBrandCar(Integer id) {
         return iBrandCarRepository.getBrandCar(id);
     }
 
     @Override
-    public BrandCarPojo save(BrandCarPojo newBrandCar) {
+    public BrandCarDto save(BrandCarDto newBrandCar) {
         return iBrandCarRepository.save(newBrandCar);
     }
 
     @Override
-    public Optional<BrandCarPojo> update(BrandCarPojo newBrandCar) {
+    public Optional<BrandCarDto> update(BrandCarDto newBrandCar) {
         if (iBrandCarRepository.getBrandCar(newBrandCar.getId()).isEmpty()){
             return Optional.empty();
         }
