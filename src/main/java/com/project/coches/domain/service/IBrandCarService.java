@@ -1,11 +1,11 @@
-package com.project.coches.domain.repository;
+package com.project.coches.domain.service;
 
 import com.project.coches.domain.dto.BrandCarDto;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface IBrandCarRepository {
+public interface IBrandCarService {
 
     /**
      * Develve una lista con todas las marcas de coches
@@ -28,8 +28,15 @@ public interface IBrandCarRepository {
     BrandCarDto save(BrandCarDto newBrandCar);
 
     /**
+     * Actualiza una marca coche
+     * @param newBrandCar marca coche a actualizar
+     * @return marca coche actualizada
+     */
+    Optional<BrandCarDto> update(BrandCarDto newBrandCar);
+
+    /**
      * Elimina una marca coche dado su id
      * @param idBrandCar id de la marca coche a eliminar
      */
-    void delete(Integer idBrandCar);
+    boolean delete(Integer idBrandCar);
 }
