@@ -1,4 +1,4 @@
-package com.project.coches.domain.service;
+package com.project.coches.domain.useCase;
 
 import com.project.coches.domain.dto.CustomerDto;
 import com.project.coches.domain.dto.ResponsePassCustomerDto;
@@ -6,7 +6,7 @@ import com.project.coches.domain.dto.ResponsePassCustomerDto;
 import java.util.List;
 import java.util.Optional;
 
-public interface ICustomerService {
+public interface ICustomerUseCase {
 
     List<CustomerDto> getAll();
 
