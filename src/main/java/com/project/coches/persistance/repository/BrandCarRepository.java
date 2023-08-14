@@ -2,6 +2,7 @@ package com.project.coches.persistance.repository;
 
 import com.project.coches.domain.dto.BrandCarDto;
 import com.project.coches.domain.repository.IBrandCarRepository;
+import com.project.coches.persistance.crud.IBrandCarCrud;
 import com.project.coches.persistance.entity.BrandCarEntity;
 import com.project.coches.persistance.mapper.IBrandCarMapper;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ public class BrandCarRepository implements IBrandCarRepository {
     /**
      * crud de marca coche
      */
-    private final IBrandCarCrudRepository iBrandCarCrudRepository;
+    private final IBrandCarCrud iBrandCarCrud;
     /**
      * mapper de marca coche
      */
@@ -29,7 +30,7 @@ public class BrandCarRepository implements IBrandCarRepository {
      */
     @Override
     public List<BrandCarDto> getAll() {
-        return iBrandCarMapper.toMarcasCochePojo(iBrandCarCrudRepository.findAll()); //se hace el llamado del mapper porque los metodos del crudRepository me devuelven entidades y se necesitan son pojos(DTO)
+        return iBrandCarMapper.toMarcasCochePojo(iBrandCarCrud.findAll()); //se hace el llamado del mapper porque los metodos del crudRepository me devuelven entidades y se necesitan son pojos(DTO)
     }
 
     /**
@@ -39,7 +40,7 @@ public class BrandCarRepository implements IBrandCarRepository {
      */
     @Override
     public Optional<BrandCarDto> getBrandCar(Integer id) {
-        return iBrandCarCrudRepository.findById(id)//esto me devuelve un optionalEntity pero yo necesito es un optionalPojo y para eso se hace el map
+        return iBrandCarCrud.findById(id)//esto me devuelve un optionalEntity pero yo necesito es un optionalPojo y para eso se hace el map
                 .map(iBrandCarMapper::toMarcaCochePojo);
         //(brandCarEntity -> iBrandCarMapper.toMarcaCochePojo(brandCarEntity))-forma normal lambda
         //(iBrandCarMapper::toMarcaCochePojo)-aqui se tranforma el lambda a un metodo por referencia
@@ -48,11 +49,11 @@ public class BrandCarRepository implements IBrandCarRepository {
     @Override
     public BrandCarDto save(BrandCarDto newBrandCar) {//aqui como se recibe primero un pojo y yo necesito una entidad se debe castear
         BrandCarEntity brandCarEntity = iBrandCarMapper.toMarcaCocheEntity(newBrandCar);//como debo retornar nuevamente un pojo debo mappear la salida
-        return iBrandCarMapper.toMarcaCochePojo(iBrandCarCrudRepository.save(brandCarEntity));
+        return iBrandCarMapper.toMarcaCochePojo(iBrandCarCrud.save(brandCarEntity));
     }
 
     @Override
     public void delete(Integer idBrandCar) {//como no se debe devolver nada no es necesario el uso de mapper
-        iBrandCarCrudRepository.deleteById(idBrandCar);
+        iBrandCarCrud.deleteById(idBrandCar);
     }
 }
